@@ -1,9 +1,9 @@
 from distutils.core import setup
-setup(name='sequtil',
+setup(name='sequtils',
       version='0.1',
       py_modules=['sequtils'],
       author_email='ales.kotnik@gmail.com',
-      url='http://bottlepy.org/',
+      url='https://github.com/alesk/sequtils',
       license='MIT',
       platforms = 'any',
       classifiers=['Development Status :: 3 - Alpha',
@@ -15,6 +15,5 @@ setup(name='sequtil',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.2',
         'Programming Language :: Python :: 3.3'],
-      requires = [
-          "argparse" ]
+      requires = [ "itertools" ]
       )
