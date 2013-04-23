@@ -41,11 +41,20 @@ def different_keys(dct1, dct2):
   shared_keys = set1 & set2
   return set1.difference(set2) & set2.difference(set1)
 
-def get_in(m, keys):
-    if len(keys) == 1:
-        return m[keys[0]]
+def get_in(m, keys, not_found=None):
+    """
+    Returns the value in a nested dict,
+    where keys is list of ke(ys. Returns None if the key is not present,
+    or the not_found value if supplied.
+    """
+    if not m:
+        return not_found
+    if len(keys) == 0:
+        return not_found
+    elif len(keys) == 1:
+        return m.get(keys[0], not_found)
     else:
-        return get_in(m[keys[0]], keys[1:])
+        return get_in(m.get(keys[0], None), keys[1:], not_found)
 
 def makelist(x):
     """
