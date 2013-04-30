@@ -1,6 +1,6 @@
 from distutils.core import setup
 setup(name='sequtils',
-      version='0.1.1',
+      version='0.1.2',
       py_modules=['sequtils'],
       author_email='ales.kotnik@gmail.com',
       url='https://github.com/alesk/sequtils',

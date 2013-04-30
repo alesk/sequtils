@@ -6,10 +6,12 @@ import itertools
 "Reimplementation of some clojure-core functions"
 
 def select_keys(dct, keys_to_extract):
-  return dict([ (k,v) for k, v in dct.items() if k in keys_to_extract])
+    """Returns subdict with only keys_to_extract included"""
+    return dict([ (k,v) for k, v in dct.items() if k in keys_to_extract])
 
 def select_values(dct, keys_to_extract):
-  return [ v for k, v in dct.items() if k in keys_to_extract]
+    """Returns vector of values from keys_to_extract."""
+    return [ dct[k] for k in keys_to_extract if dct.has_key(k)]
 
 def remove_keys(dct, keys_to_extract):
   return dict([ (k,v) for k, v in dct.items() if k not in keys_to_extract])
