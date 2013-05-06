@@ -9,9 +9,15 @@ def select_keys(dct, keys_to_extract):
     """Returns subdict with only keys_to_extract included"""
     return dict([ (k,v) for k, v in dct.items() if k in keys_to_extract])
 
-def select_values(dct, keys_to_extract):
-    """Returns vector of values from keys_to_extract."""
-    return [ dct[k] for k in keys_to_extract if dct.has_key(k)]
+def select_values(dct, keys_to_extract, missing=None):
+    """Returns vector of values from keys_to_extract.
+       Missing values are returned as `missing`
+       >>> select_values({'a':1, 'b':2}, ('a', 'b', 'c'))
+       [1, 2, None]
+       >>> select_values({'a':1, 'b':2}, ('a', 'b', 'c'), 0)
+       [1, 2, 0]
+    """
+    return [ dct.get(k, missing) for k in keys_to_extract]
 
 def remove_keys(dct, keys_to_extract):
   return dict([ (k,v) for k, v in dct.items() if k not in keys_to_extract])
@@ -70,3 +76,20 @@ def flatten(seq):
     Returns list of slists fčattened as single level sequence
     """
     return list(itertools.chain.from_iterable(seq))
+
+def pairs(iterable):
+    """
+    >>> list(pairs("abcdef"))
+    [('a', 'b'), ('c', 'd'), ('e', 'f')]
+    """
+    return itertools.imap(tuple, chunks(iterable, 2))
+
+def chunks(iterable, size):
+    """
+    >>> map(tuple, chunks("abcdef",2))
+    [('a', 'b'), ('c', 'd'), ('e', 'f')]
+    """
+    groupped = itertools.groupby(enumerate(iterable), lambda x: x[0] / size)
+    for k, chunk in groupped:
+        yield itertools.imap(lambda x: x[1], chunk)
+
